@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d19">
+  <meta name="description" content="Koleksi tautan unduhan software dan sistem operasi.">
+  <title>Koleksi Download</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080d19;
+      --panel: #101827;
+      --panel-hover: #141f33;
+      --border: #263248;
+      --text: #f4f7ff;
+      --muted: #91a5c8;
+      --blue: #78a7ff;
+      --blue-strong: #4c83ff;
+      --focus: rgba(91, 139, 255, .28);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at top left, rgba(40, 76, 150, .12), transparent 42%), var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    .wrap { width: min(1440px, 100%); margin: 0 auto; padding: 30px 32px 38px; }
+    .eyebrow { color: #80a8ff; font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; margin: 0 0 8px; }
+    .top { display: flex; align-items: end; justify-content: space-between; gap: 24px; }
+    h1 { font-size: clamp(28px, 3vw, 38px); line-height: 1.15; letter-spacing: -.045em; margin: 0 0 8px; }
+    .subtitle { color: var(--muted); font-size: 13px; margin: 0; max-width: 650px; }
+    .searchbox { position: relative; flex: 0 1 320px; min-width: 230px; }
+    .searchbox span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #85aaff; font-size: 19px; pointer-events: none; }
+    .searchbox input {
+      width: 100%; height: 44px; padding: 0 15px 0 39px; border: 1px solid var(--border);
+      border-radius: 12px; background: #111a2b; color: var(--text); outline: none; font: inherit; font-size: 12px;
+    }
+    .searchbox input::placeholder { color: #8295b7; }
+    .searchbox input:focus { border-color: var(--blue-strong); box-shadow: 0 0 0 3px var(--focus); }
+    .filters { display: flex; flex-wrap: wrap; gap: 9px; margin: 24px 0 20px; }
+    .filter {
+      appearance: none; cursor: pointer; color: #b8c9e9; background: #111a2b; border: 1px solid #28344a;
+      border-radius: 9px; padding: 8px 14px; font: inherit; font-size: 11px; transition: .18s ease;
+    }
+    .filter:hover { border-color: #526da3; color: white; }
+    .filter.active { color: #dce8ff; border-color: #557dce; background: #182543; box-shadow: inset 0 0 0 1px rgba(91,139,255,.08); }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; }
+    .card {
+      display: flex; flex-direction: column; min-width: 0; padding: 17px; min-height: 222px;
+      border: 1px solid var(--border); border-radius: 17px;
+      background: linear-gradient(145deg, rgba(19,29,47,.96), rgba(13,21,36,.98));
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .card:hover { transform: translateY(-2px); border-color: #3b4e70; background: var(--panel-hover); }
+    .card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .app-icon {
+      width: 38px; height: 38px; display: grid; place-items: center; flex: 0 0 auto;
+      border-radius: 11px; font-weight: 900; font-size: 18px; background: #192c40; color: #64d4ff;
+    }
+    .app-icon.office { background: #36222d; color: #ff9a88; }
+    .app-icon.windows { background: #172d42; color: #5dd1ff; }
+    .app-icon.tools { background: #302b21; color: #ffc56b; }
+    .app-icon.software { background: #282343; color: #c6a7ff; }
+    .category { border: 1px solid #29364c; color: #b6c8e7; border-radius: 8px; padding: 4px 8px; font-size: 10px; white-space: nowrap; }
+    .card h2 { font-size: 14px; letter-spacing: -.02em; margin: 0 0 7px; font-weight: 750; }
+    .desc { color: var(--muted); font-size: 11px; margin: 0 0 15px; line-height: 1.65; }
+    .meta { display: flex; flex-wrap: wrap; gap: 6px 12px; color: #7f9ac5; font-size: 10px; margin-top: auto; margin-bottom: 14px; }
+    .meta span::before { content: "↗"; margin-right: 5px; color: #83a9ff; }
+    .download {
+      display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; min-height: 38px;
+      border: 1px solid #344a80; border-radius: 10px; background: #182440; color: #b9d0ff;
+      text-decoration: none; font-weight: 750; font-size: 11px; text-align: center; padding: 9px 12px; transition: .18s ease;
+    }
+    .download:hover { background: #243761; border-color: #5a80d2; color: white; }
+    .download:focus-visible, .filter:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+    .empty { display: none; padding: 42px 16px; text-align: center; border: 1px dashed var(--border); border-radius: 16px; color: var(--muted); }
+    .empty strong { display: block; color: var(--text); margin-bottom: 6px; }
+    footer { margin-top: 26px; padding-top: 17px; border-top: 1px solid rgba(38,50,72,.7); color: #7388aa; font-size: 11px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    footer a { color: #91b3ff; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    @media (max-width: 900px) {
+      .wrap { padding: 26px 22px 30px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .top { align-items: stretch; flex-direction: column; gap: 18px; }
+      .searchbox { flex-basis: auto; width: 100%; }
+    }
+    @media (max-width: 560px) {
+      .wrap { padding: 23px 15px 26px; }
+      .grid { grid-template-columns: 1fr; gap: 11px; }
+      .card { min-height: 205px; padding: 16px; }
+      .filters { gap: 7px; margin-top: 20px; }
+      .filter { padding: 8px 12px; }
+      h1 { font-size: 29px; }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div>
+        <p class="eyebrow">Koleksi Download</p>
+        <h1>File pilihan</h1>
+        <p class="subtitle">Pilih file lalu tekan tombol download untuk membuka tautan yang tersedia.</p>
+      </div>
+      <label class="searchbox">
+        <span aria-hidden="true">⌕</span>
+        <input id="search" type="search" placeholder="Cari nama file..." aria-label="Cari nama file">
+      </label>
+    </header>
+
+    <nav class="filters" aria-label="Filter kategori">
+      <button class="filter active" data-filter="Semua" aria-pressed="true">Semua</button>
+      <button class="filter" data-filter="Windows" aria-pressed="false">Windows</button>
+      <button class="filter" data-filter="Office" aria-pressed="false">Office</button>
+    </nav>
+
+    <section id="grid" class="grid" aria-label="Daftar file"></section>
+    <div id="empty" class="empty"><strong>File tidak ditemukan</strong>Coba kata kunci atau kategori lain.</div>
+
+    <footer>
+      <span>© <span id="year"></span> Koleksi Download</span>
+      <span>Gunakan tautan resmi dan periksa lisensi sebelum memasang software.</span>
+    </footer>
+  </main>
+
+  <script>
+    /*
+      EDIT DAFTAR DOWNLOAD DI SINI:
+      - name: nama aplikasi/file
+      - category: "Windows" atau "Office"
+      - url: ganti dengan tautan download yang kamu inginkan
+      - icon: huruf atau singkatan di kotak ikon
+      Jangan memasang tautan file bajakan atau tidak resmi.
+    */
+    const downloads = [
+      {
+        name: "Windows 11",
+        category: "Windows",
+        icon: "W",
+        iconClass: "windows",
+        description: "Unduh Windows 11 melalui halaman resmi Microsoft.",
+        info: ["ISO / installer resmi", "Microsoft"],
+        url: "https://www.microsoft.com/software-download/windows11"
+      },
+      {
+        name: "Windows 10",
+        category: "Windows",
+        icon: "W",
+        iconClass: "windows",
+        description: "Halaman resmi Windows 10. Periksa status dukungan sebelum memasang.",
+        info: ["Unduhan resmi", "Microsoft"],
+        url: "https://www.microsoft.com/software-download/windows10"
+      },
+      {
+        name: "Microsoft 365",
+        category: "Office",
+        icon: "M",
+        iconClass: "office",
+        description: "Masuk ke akun Microsoft untuk mengakses aplikasi Office yang tersedia untuk akunmu.",
+        info: ["Aplikasi Office", "Microsoft"],
+        url: "https://www.microsoft365.com/"
+      },
+      {
+        name: "Office deployment tool",
+        category: "Office",
+        icon: "O",
+        iconClass: "office",
+        description: "Alat resmi untuk deployment Office pada perangkat yang dikelola.",
+        info: ["Alat deployment", "Microsoft Learn"],
+        url: "https://www.microsoft.com/download/details.aspx?id=49117"
+      },
+      {
+        name: "Windows 11 Installation Assistant",
+        category: "Windows",
+        icon: "W",
+        iconClass: "windows",
+        description: "Bantuan instalasi Windows 11 dari situs resmi Microsoft.",
+        info: ["Alat instalasi", "Microsoft"],
+        url: "https://www.microsoft.com/software-download/windows11"
+      },
+      {
+        name: "Microsoft Support",
+        category: "Office",
+        icon: "M",
+        iconClass: "office",
+        description: "Panduan bantuan, instalasi, dan pemecahan masalah produk Microsoft Office.",
+        info: ["Dokumentasi", "Microsoft Support"],
+        url: "https://support.microsoft.com/office"
+      }
+    ];
+
+    const grid = document.getElementById("grid");
+    const search = document.getElementById("search");
+    const empty = document.getElementById("empty");
+    const filterButtons = [...document.querySelectorAll(".filter")];
+    let activeFilter = "Semua";
+
+    function safeText(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[char]);
+    }
+
+    function render() {
+      const query = search.value.trim().toLocaleLowerCase("id");
+      const filtered = downloads.filter(item => {
+        const matchesCategory = activeFilter === "Semua" || item.category === activeFilter;
+        const matchesSearch = [item.name, item.category, item.description, ...(item.info || [])]
+          .join(" ").toLocaleLowerCase("id").includes(query);
+        return matchesCategory && matchesSearch;
+      });
+
+      grid.innerHTML = filtered.map(item => `
+        <article class="card">
+          <div class="card-top">
+            <div class="app-icon ${safeText(item.iconClass || "")}" aria-hidden="true">${safeText(item.icon || "?")}</div>
+            <span class="category">${safeText(item.category)}</span>
+          </div>
+          <h2>${safeText(item.name)}</h2>
+          <p class="desc">${safeText(item.description || "")}</p>
+          <div class="meta">${(item.info || []).map(text => `<span>${safeText(text)}</span>`).join("")}</div>
+          <a class="download" href="${safeText(item.url)}" target="_blank" rel="noopener noreferrer">
+            Buka link download <span aria-hidden="true">↗</span>
+          </a>
+        </article>
+      `).join("");
+
+      empty.style.display = filtered.length ? "none" : "block";
+      grid.style.display = filtered.length ? "grid" : "none";
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+        filterButtons.forEach(item => {
+          const active = item === button;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-pressed", String(active));
+        });
+        render();
+      });
+    });
+    search.addEventListener("input", render);
+    document.getElementById("year").textContent = new Date().getFullYear();
+    render();
+  </script>
+</body>
+</html>
